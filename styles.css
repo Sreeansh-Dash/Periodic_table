@@ -620,7 +620,7 @@ h1, h2, h3 {
     }
 }
 
-/* Improve explore section layout */
+
 #explore .container {
     text-align: center;
     max-width: 1000px;
@@ -662,7 +662,7 @@ h2 {
     justify-content: center;
 }
 
-/* Ensure proper spacing for the bottom text */
+
 .table-section .container {
     position: relative;
     padding-bottom: 120px;
@@ -766,7 +766,7 @@ h2 {
     border-radius: 6px;
 }
 
-/* Add the hidden class back */
+
 .hidden {
     display: none;
 }
@@ -829,7 +829,7 @@ h2 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Ensure the color boxes match the element colors */
+
 .color-box.alkali { background-color: rgba(255, 102, 102, 0.8); }
 .color-box.alkaline { background-color: rgba(255, 191, 0, 0.8); }
 .color-box.transition { background-color: rgba(204, 204, 204, 0.8); }
@@ -867,11 +867,6 @@ h2 {
         margin-top: 20px;
     }
 }
-
-/* ... (all your previous styles remain as is up to the MODERN/MOBILE section) ... */
-
-/* --- MOBILE FRIENDLY REFINEMENTS --- */
-/* ... keep all your other styles ... */
 
 /* --- MOBILE FRIENDLY REFINEMENTS --- */
 @media (max-width: 900px) {
@@ -926,16 +921,16 @@ h2 {
     margin: 0 auto 12px auto;
     position: relative;
     background: none;
-    /* Make sure the child fills min-width and is aligned left */
+   
     box-sizing: border-box;
-    /* Key fix for mobile scroll, prevents horizontal scroll cut-off */
+    
     display: block;
-    /* Prevent parent container padding/margin from hiding grid */
+    
     padding: 0;
   }
 
   .periodic-table {
-    min-width: 1080px !important; /* KEY: Increase min-width so first column is always included in scroll area */
+    min-width: 1080px !important; 
     width: max-content !important;
     max-width: none !important;
     margin: 0 !important;
@@ -1002,7 +997,7 @@ h2 {
   }
 }
 
-/* Always show scroll-hint only on mobile */
+
 @media (min-width: 901px) {
   .scroll-hint { display: none !important; }
 }
