@@ -1239,7 +1239,84 @@ const octaves = [
     ['Pt, Ir', 'Tl', 'Pb', 'Th', 'Hg', 'Bi', 'Os']
 ];
 
-// ...[all your original data and code above unchanged, then replace renderModernTable and renderMendeleev as below]...
+// Elements data, triads data, octaves data ... (unchanged, omitted for brevity)
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('hero').classList.add('visible');
+    window.addEventListener('scroll', handleScroll);
+    initializeMoreElements();
+});
+
+function handleScroll() {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        if (isElementInViewport(section)) {
+            section.classList.add('visible');
+            if (section.id === 'history') animateTimelineItems();
+            if (section.id === 'uses') animateUseCards();
+        }
+    });
+}
+function animateTimelineItems() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('visible');
+        }, index * 200);
+    });
+}
+function animateUseCards() {
+    const useCards = document.querySelectorAll('.use-card');
+    useCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add('visible');
+        }, index * 150);
+    });
+}
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top <= window.innerHeight - 150 &&
+        rect.bottom >= 0
+    );
+}
+function navigateTo(tableType) {
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('hidden');
+        section.classList.remove('visible');
+    });
+    const tableSection = document.getElementById(`${tableType}-table`);
+    tableSection.classList.remove('hidden');
+    tableSection.classList.add('visible');
+    switch (tableType) {
+        case 'modern':
+            renderModernTable();
+            break;
+        case 'triads':
+            renderTriads();
+            break;
+        case 'octaves':
+            renderOctaves();
+            break;
+        case 'mendeleev':
+            renderMendeleev();
+            break;
+    }
+}
+function showMainPage() {
+    document.querySelectorAll('.table-section').forEach(section => {
+        section.classList.add('hidden');
+    });
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('hidden');
+    });
+    const exploreSection = document.getElementById('explore');
+    exploreSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    handleScroll();
+}
+function initializeMoreElements() {}
+
+// --- MODERN PERIODIC TABLE ---
 
 function renderModernTable() {
     // Containers
@@ -1359,6 +1436,62 @@ function renderModernTable() {
     addTableLabels(tableGrid);
 }
 
+
+// --- TRIADS, OCTAVES, MENDELEEV TABLES (unchanged) ---
+
+function renderTriads() {
+    const container = document.getElementById('triads-container');
+    container.innerHTML = '';
+    container.className = 'triad-container';
+    triads.forEach(triad => {
+        const triadDiv = document.createElement('div');
+        triadDiv.className = 'triad-group';
+        triadDiv.innerHTML = `
+            <div class="triad-title">${triad.name}</div>
+            <div class="triad-elements">
+                ${triad.elements.map(el => `
+                    <div class="element">
+                        <div class="symbol">${el.symbol}</div>
+                        <div class="mass">${el.atomicMass}</div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="triad-property">
+                <p>Mean of first and last: ${((triad.elements[0].atomicMass + triad.elements[2].atomicMass) / 2).toFixed(1)}</p>
+                <p>Middle element: ${triad.elements[1].atomicMass}</p>
+            </div>
+        `;
+        container.appendChild(triadDiv);
+    });
+}
+function renderOctaves() {
+    const container = document.getElementById('octaves-container');
+    container.innerHTML = '';
+    container.className = 'octave-container';
+    const explanation = document.createElement('div');
+    explanation.className = 'octaves-explanation';
+    explanation.innerHTML = `
+        <p>In 1865, John Newlands arranged the known elements by increasing atomic weight. 
+        He noticed that every eighth element exhibited similar properties, 
+        which he called the "Law of Octaves" (similar to musical octaves).</p>
+        <p>Elements highlighted in the same column position show the pattern Newlands observed.</p>
+    `;
+    container.appendChild(explanation);
+    octaves.forEach((row, rowIndex) => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'octave-row';
+        row.forEach((element, colIndex) => {
+            const elementDiv = document.createElement('div');
+            elementDiv.className = 'element';
+            if (colIndex === rowIndex % 7) {
+                elementDiv.classList.add('highlighted');
+            }
+            elementDiv.innerHTML = element;
+            rowDiv.appendChild(elementDiv);
+        });
+        container.appendChild(rowDiv);
+    });
+}
 function renderMendeleev() {
     const container = document.getElementById('mendeleev-container');
     container.innerHTML = '';
@@ -1430,4 +1563,18 @@ function renderMendeleev() {
     }
     tableDiv.appendChild(table);
     container.appendChild(tableDiv);
+}
+function toRomanNumeral(num) {
+    const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    return romanNumerals[num - 1] || num.toString();
+}
+function filterCategory(category) {
+    const elements = document.querySelectorAll('.element');
+    elements.forEach(el => {
+        if (category === 'all' || el.classList.contains(category)) {
+            el.style.opacity = '1';
+        } else {
+            el.style.opacity = '0.3';
+        }
+    });
 }
