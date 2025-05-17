@@ -1239,40 +1239,24 @@ const octaves = [
     ['Pt, Ir', 'Tl', 'Pb', 'Th', 'Hg', 'Bi', 'Os']
 ];
 
-// DOM loaded event
+// Elements data, triads data, octaves data ... (unchanged, omitted for brevity)
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Make the first section visible
     document.getElementById('hero').classList.add('visible');
-    
-    // Add scroll event listener for animations
     window.addEventListener('scroll', handleScroll);
-    
-    // Initialize with more elements if needed
     initializeMoreElements();
 });
 
-// Handle scroll events for animations
 function handleScroll() {
-    // Make sections visible when they enter viewport
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
         if (isElementInViewport(section)) {
             section.classList.add('visible');
-            
-            // If it's the history section, animate timeline items
-            if (section.id === 'history') {
-                animateTimelineItems();
-            }
-            
-            // If it's the uses section, animate use cards
-            if (section.id === 'uses') {
-                animateUseCards();
-            }
+            if (section.id === 'history') animateTimelineItems();
+            if (section.id === 'uses') animateUseCards();
         }
     });
 }
-
-// Animate timeline items with a delay
 function animateTimelineItems() {
     const timelineItems = document.querySelectorAll('.timeline-item');
     timelineItems.forEach((item, index) => {
@@ -1281,8 +1265,6 @@ function animateTimelineItems() {
         }, index * 200);
     });
 }
-
-// Animate use cards with a delay
 function animateUseCards() {
     const useCards = document.querySelectorAll('.use-card');
     useCards.forEach((card, index) => {
@@ -1291,8 +1273,6 @@ function animateUseCards() {
         }, index * 150);
     });
 }
-
-// Check if an element is in the viewport
 function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -1300,21 +1280,14 @@ function isElementInViewport(el) {
         rect.bottom >= 0
     );
 }
-
-// Navigate to a specific table view
 function navigateTo(tableType) {
-    // Hide all sections
     document.querySelectorAll('section').forEach(section => {
         section.classList.add('hidden');
         section.classList.remove('visible');
     });
-    
-    // Show the selected table section
     const tableSection = document.getElementById(`${tableType}-table`);
     tableSection.classList.remove('hidden');
     tableSection.classList.add('visible');
-    
-    // Render the appropriate table
     switch (tableType) {
         case 'modern':
             renderModernTable();
@@ -1330,103 +1303,97 @@ function navigateTo(tableType) {
             break;
     }
 }
-
-// Return to the main page
 function showMainPage() {
-    // Hide all table sections
     document.querySelectorAll('.table-section').forEach(section => {
         section.classList.add('hidden');
     });
-    
-    // Show all main sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('hidden');
     });
-    
-    // Scroll to explore section
     const exploreSection = document.getElementById('explore');
     exploreSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    
-    // Re-trigger scroll effects
     handleScroll();
 }
+function initializeMoreElements() {}
 
-// Initialize with more elements if needed
-function initializeMoreElements() {
-    // This is where you would add code to populate the elements array
-    // with more elements from an external source or hard-coded data
-}
+// --- MODERN PERIODIC TABLE ---
 
-// Render the modern periodic table
 function renderModernTable() {
-    const tableContainer = document.getElementById('table');
-    tableContainer.innerHTML = '';
-    
-    // Create a container for the table with proper spacing
-    const tableGrid = document.createElement('div');
-    tableGrid.className = 'periodic-table';
-    tableContainer.appendChild(tableGrid);
-    
-    // Add description
-    const description = document.createElement('div');
-    description.className = 'table-description';
-    description.innerHTML = `
+    // Containers
+    const legendContainer = document.querySelector('#modern-table .element-legend');
+    const filtersContainer = document.querySelector('#modern-table #filters');
+    const descContainer = document.querySelector('#modern-table .table-description');
+    const tableContainer = document.querySelector('#modern-table #table');
+
+    // LEGEND
+    legendContainer.innerHTML = `
+        <div class="legend-grid">
+            <div class="legend-item">
+                <div class="color-box alkali"></div>
+                <span>Alkali Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box alkaline"></div>
+                <span>Alkaline Earth Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box transition"></div>
+                <span>Transition Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box metal"></div>
+                <span>Post-transition Metals</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box metalloid"></div>
+                <span>Metalloids</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box nonmetal"></div>
+                <span>Nonmetals</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box halogen"></div>
+                <span>Halogens</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box noble"></div>
+                <span>Noble Gases</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box lanthanoid"></div>
+                <span>Lanthanides</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box actinoid"></div>
+                <span>Actinides</span>
+            </div>
+        </div>
+    `;
+
+    // FILTERS
+    filtersContainer.innerHTML = `
+        <button onclick="filterCategory('all')">All Elements</button>
+        <button onclick="filterCategory('nonmetal')">Nonmetals</button>
+        <button onclick="filterCategory('noble')">Noble Gases</button>
+        <button onclick="filterCategory('metal')">Metals</button>
+        <button onclick="filterCategory('halogen')">Halogens</button>
+    `;
+
+    // DESCRIPTION
+    descContainer.innerHTML = `
         <p>The modern periodic table arranges elements by atomic number and electron configuration, 
         creating a systematic organization that reveals periodic trends in element properties.</p>
         <p>The table's current form was developed primarily by Henry Moseley in 1913, who showed 
         that elements should be arranged by atomic number rather than atomic weight.</p>
     `;
-    
 
-    // Create and add the legend
-    const legend = document.createElement('div');
-    legend.className = 'element-legend';
-    legend.innerHTML = `
-        <div class="legend-grid">
-            <div class="legend-item">
-                <span class="color-box alkali"></span>
-                <span>Alkali Metals</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box alkaline"></span>
-                <span>Alkaline Earth Metals</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box transition"></span>
-                <span>Transition Metals</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box metal"></span>
-                <span>Post-Transition Metals</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box metalloid"></span>
-                <span>Metalloids</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box nonmetal"></span>
-                <span>Nonmetals</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box halogen"></span>
-                <span>Halogens</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box noble"></span>
-                <span>Noble Gases</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box lanthanoid"></span>
-                <span>Lanthanides</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box actinoid"></span>
-                <span>Actinides</span>
-            </div>
-        </div>
-    `;
-    
-    // First, create an empty grid
+    // TABLE
+    tableContainer.innerHTML = '';
+    const tableGrid = document.createElement('div');
+    tableGrid.className = 'periodic-table';
+    tableContainer.appendChild(tableGrid);
+
     const totalRows = 10; // 7 main rows + lanthanoids + actinoids + spacing
     const totalCols = 18;
     for (let row = 1; row <= totalRows; row++) {
@@ -1438,20 +1405,13 @@ function renderModernTable() {
             tableGrid.appendChild(emptyCell);
         }
     }
-    
-    // Then place elements in the correct positions
     elements.forEach(el => {
         let ypos = el.ypos;
-        
         const elementDiv = document.createElement('div');
         elementDiv.className = `element ${el.category}`;
         elementDiv.style.gridColumn = el.xpos;
         elementDiv.style.gridRow = ypos;
-        
-        // Determine group number - use 3 for lanthanides and actinides
         let groupNumber = el.category === 'lanthanoid' || el.category === 'actinoid' ? 3 : el.xpos;
-        
-        // Create element content
         elementDiv.innerHTML = `
             <div class="number">${el.number}</div>
             <div class="symbol">${el.symbol}</div>
@@ -1463,32 +1423,18 @@ function renderModernTable() {
                 <div>Phase: ${el.phase}</div>
             </div>
         `;
-        
-        // Add event listeners for hover effects
         elementDiv.addEventListener('mouseover', () => {
             elementDiv.classList.add('hovered');
         });
-        
         elementDiv.addEventListener('mouseout', () => {
             elementDiv.classList.remove('hovered');
         });
-        
         tableGrid.appendChild(elementDiv);
     });
-    
-    // Add labels for groups and periods
     addTableLabels(tableGrid);
-
-    // Add the legend before the back button
-    const backButton = tableContainer.querySelector('.back-btn');
-    
-    tableContainer.insertBefore(description, backButton);
-    
 }
 
-// Helper function to add group and period labels
 function addTableLabels(tableGrid) {
-    // Group labels (top)
     for (let i = 1; i <= 18; i++) {
         const label = document.createElement('div');
         label.className = 'table-label group-label';
@@ -1497,8 +1443,6 @@ function addTableLabels(tableGrid) {
         label.style.gridColumn = i;
         tableGrid.appendChild(label);
     }
-    
-    // Period labels (left)
     for (let i = 1; i <= 7; i++) {
         const label = document.createElement('div');
         label.className = 'table-label period-label';
@@ -1507,15 +1451,13 @@ function addTableLabels(tableGrid) {
         label.style.gridColumn = 0;
         tableGrid.appendChild(label);
     }
-    
-    // Labels for lanthanides and actinides
     const lanthanideLabel = document.createElement('div');
     lanthanideLabel.className = 'table-label series-label';
     lanthanideLabel.textContent = 'Lanthanides';
     lanthanideLabel.style.gridRow = 9;
     lanthanideLabel.style.gridColumn = 2;
     tableGrid.appendChild(lanthanideLabel);
-    
+
     const actinideLabel = document.createElement('div');
     actinideLabel.className = 'table-label series-label';
     actinideLabel.textContent = 'Actinides';
@@ -1524,17 +1466,15 @@ function addTableLabels(tableGrid) {
     tableGrid.appendChild(actinideLabel);
 }
 
+// --- TRIADS, OCTAVES, MENDELEEV TABLES (unchanged) ---
 
-// Render Dobereiner's Triads
 function renderTriads() {
     const container = document.getElementById('triads-container');
     container.innerHTML = '';
     container.className = 'triad-container';
-    
     triads.forEach(triad => {
         const triadDiv = document.createElement('div');
         triadDiv.className = 'triad-group';
-        
         triadDiv.innerHTML = `
             <div class="triad-title">${triad.name}</div>
             <div class="triad-elements">
@@ -1550,19 +1490,13 @@ function renderTriads() {
                 <p>Middle element: ${triad.elements[1].atomicMass}</p>
             </div>
         `;
-        
         container.appendChild(triadDiv);
     });
 }
-
-// Render Newlands' Octaves
-// Improved render function for Newlands' Octaves
 function renderOctaves() {
     const container = document.getElementById('octaves-container');
     container.innerHTML = '';
     container.className = 'octave-container';
-    
-    // First, add an explanation
     const explanation = document.createElement('div');
     explanation.className = 'octaves-explanation';
     explanation.innerHTML = `
@@ -1572,39 +1506,25 @@ function renderOctaves() {
         <p>Elements highlighted in the same column position show the pattern Newlands observed.</p>
     `;
     container.appendChild(explanation);
-    
-    // Create each row
     octaves.forEach((row, rowIndex) => {
         const rowDiv = document.createElement('div');
         rowDiv.className = 'octave-row';
-        
-        // Add each element in this row
         row.forEach((element, colIndex) => {
             const elementDiv = document.createElement('div');
             elementDiv.className = 'element';
-            
-            // If this element is in the same column position as the row number (modulo 7),
-            // highlight it to show the octave pattern
             if (colIndex === rowIndex % 7) {
                 elementDiv.classList.add('highlighted');
             }
-            
             elementDiv.innerHTML = element;
             rowDiv.appendChild(elementDiv);
         });
-        
         container.appendChild(rowDiv);
     });
 }
-
-
-// Render Mendeleev's Table
 function renderMendeleev() {
     const container = document.getElementById('mendeleev-container');
     container.innerHTML = '';
     container.className = 'mendeleev-container';
-
-    // Add explanation
     const explanation = document.createElement('div');
     explanation.className = 'mendeleev-explanation';
     explanation.innerHTML = `
@@ -1612,12 +1532,8 @@ function renderMendeleev() {
         He left gaps for undiscovered elements and predicted their properties, which were later proven correct.</p>
     `;
     container.appendChild(explanation);
-
-    // Create Mendeleev's table
     const tableDiv = document.createElement('div');
     tableDiv.className = 'mendeleev-table';
-
-    // Mendeleev's original groups (I to VIII)
     const mendeleevGroups = [
         ['H 1', 'Li 7', 'Na 23', 'K 39', 'Cu 63', 'Rb 85', 'Ag 108', 'Cs 133', 'Au 197'],
         ['Be 9', 'Mg 24', 'Ca 40', 'Zn 65', 'Sr 87', 'Cd 112', 'Ba 137', 'Hg 201'],
@@ -1632,12 +1548,8 @@ function renderMendeleev() {
         ['--', '--', '--', '--', 'Ir 198', '--', '--', '--'],
         ['--', '--', '--', '--', 'Os 199', '--', '--', '--']
     ];
-
-    // Create table structure
     const table = document.createElement('table');
     table.className = 'mendeleev-grid';
-
-    // Add group numbers (I to VIII)
     const headerRow = document.createElement('tr');
     for (let i = 0; i <= mendeleevGroups.length; i++) {
         const th = document.createElement('th');
@@ -1645,19 +1557,13 @@ function renderMendeleev() {
         headerRow.appendChild(th);
     }
     table.appendChild(headerRow);
-
-    // Add elements
     const maxRows = Math.max(...mendeleevGroups.map(g => g.length));
     for (let row = 0; row < maxRows; row++) {
         const tr = document.createElement('tr');
-        
-        // Add period number
         const periodTd = document.createElement('td');
         periodTd.className = 'period-number';
         periodTd.textContent = `Period ${row + 1}`;
         tr.appendChild(periodTd);
-
-        // Add elements for each group
         for (let group = 0; group < mendeleevGroups.length; group++) {
             const td = document.createElement('td');
             if (mendeleevGroups[group][row]) {
@@ -1675,21 +1581,15 @@ function renderMendeleev() {
         }
         table.appendChild(tr);
     }
-
     tableDiv.appendChild(table);
     container.appendChild(tableDiv);
 }
-
-// Helper function to convert numbers to Roman numerals
 function toRomanNumeral(num) {
     const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
     return romanNumerals[num - 1] || num.toString();
 }
-
-// Filter elements by category
 function filterCategory(category) {
     const elements = document.querySelectorAll('.element');
-    
     elements.forEach(el => {
         if (category === 'all' || el.classList.contains(category)) {
             el.style.opacity = '1';
