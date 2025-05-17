@@ -1239,7 +1239,7 @@ const octaves = [
     ['Pt, Ir', 'Tl', 'Pb', 'Th', 'Hg', 'Bi', 'Os']
 ];
 
-// Elements data, triads data, octaves data ... (unchanged, omitted for brevity)
+
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('hero').classList.add('visible');
@@ -1391,7 +1391,7 @@ function renderModernTable() {
 
     // TABLE
     tableContainer.innerHTML = '';
-    // Important: let CSS handle width, but also set min-width for safety
+    
     const tableGrid = document.createElement('div');
     tableGrid.className = 'periodic-table';
     tableGrid.style.minWidth = '1080px'; // KEY: ensure wide enough for all 18 columns
@@ -1437,7 +1437,7 @@ function renderModernTable() {
     });
     addTableLabels(tableGrid);
 
-    // Scroll the table-scroll-wrapper to far left (show first column)
+    
     if (tableScrollWrapper) {
         tableScrollWrapper.scrollLeft = 0;
     }
@@ -1445,7 +1445,7 @@ function renderModernTable() {
 
 
 
-// --- TRIADS, OCTAVES, MENDELEEV TABLES (unchanged) ---
+// --- TRIADS, OCTAVES, MENDELEEV TABLES ---
 
 function renderTriads() {
     const container = document.getElementById('triads-container');
