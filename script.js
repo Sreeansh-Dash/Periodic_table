@@ -1324,6 +1324,7 @@ function renderModernTable() {
     const filtersContainer = document.querySelector('#modern-table #filters');
     const descContainer = document.querySelector('#modern-table .table-description');
     const tableContainer = document.querySelector('#modern-table #table');
+    const tableScrollWrapper = document.querySelector('#modern-table .table-scroll-wrapper');
 
     // LEGEND
     legendContainer.innerHTML = `
@@ -1390,9 +1391,10 @@ function renderModernTable() {
 
     // TABLE
     tableContainer.innerHTML = '';
+    // Important: let CSS handle width, but also set min-width for safety
     const tableGrid = document.createElement('div');
     tableGrid.className = 'periodic-table';
-    tableGrid.style.minWidth = '800px'; // Make sure first column is always scrollable
+    tableGrid.style.minWidth = '1080px'; // KEY: ensure wide enough for all 18 columns
     tableGrid.style.width = 'max-content';
     tableContainer.appendChild(tableGrid);
 
@@ -1434,7 +1436,13 @@ function renderModernTable() {
         tableGrid.appendChild(elementDiv);
     });
     addTableLabels(tableGrid);
+
+    // Scroll the table-scroll-wrapper to far left (show first column)
+    if (tableScrollWrapper) {
+        tableScrollWrapper.scrollLeft = 0;
+    }
 }
+
 
 
 // --- TRIADS, OCTAVES, MENDELEEV TABLES (unchanged) ---
