@@ -80,7 +80,6 @@
         <div class="container">
             <h2>Explore Different Periodic Tables</h2>
             <p>Journey through the evolution of how elements have been organized throughout history.</p>
-            
             <div class="explore-buttons">
                 <button class="explore-btn" onclick="navigateTo('modern')">Modern Periodic Table</button>
                 <button class="explore-btn" onclick="navigateTo('triads')">Döbereiner's Triads</button>
@@ -94,58 +93,13 @@
     <section id="modern-table" class="table-section gradient-modern hidden">
         <div class="container">
             <h2>Modern Periodic Table</h2>
-            <div class="element-legend">
-                <div class="legend-grid">
-                    <div class="legend-item">
-                        <div class="color-box alkali"></div>
-                        <span>Alkali Metals</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box alkaline"></div>
-                        <span>Alkaline Earth Metals</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box transition"></div>
-                        <span>Transition Metals</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box metal"></div>
-                        <span>Post-transition Metals</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box metalloid"></div>
-                        <span>Metalloids</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box nonmetal"></div>
-                        <span>Nonmetals</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box halogen"></div>
-                        <span>Halogens</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box noble"></div>
-                        <span>Noble Gases</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box lanthanoid"></div>
-                        <span>Lanthanides</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box actinoid"></div>
-                        <span>Actinides</span>
-                    </div>
-                </div>
+            <div class="element-legend"></div>
+            <div id="filters"></div>
+            <div class="table-description"></div>
+            <div class="table-scroll-wrapper">
+                <div id="table" class="periodic-table"></div>
+                <div class="scroll-hint">⟷ Scroll</div>
             </div>
-            <div id="filters">
-                <button onclick="filterCategory('all')">All Elements</button>
-                <button onclick="filterCategory('nonmetal')">Nonmetals</button>
-                <button onclick="filterCategory('noble')">Noble Gases</button>
-                <button onclick="filterCategory('metal')">Metals</button>
-                <button onclick="filterCategory('halogen')">Halogens</button>
-            </div>
-            <div id="table" class="periodic-table"></div>
             <button class="back-btn" onclick="showMainPage()">Back to Main</button>
         </div>
     </section>
