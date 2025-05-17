@@ -315,18 +315,14 @@ h1, h2, h3 {
 }
 
 .table-description {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static !important;
     width: 90%;
     max-width: 800px;
     background: rgba(255, 255, 255, 0.2);
     padding: 15px;
     border-radius: 10px;
-    margin: 0;
+    margin: 0 auto 10px auto;
     z-index: 2;
-    margin-top: 50px;
 }
 
 /* Center align tables */
@@ -874,126 +870,109 @@ h2 {
 
 /* --- MOBILE FRIENDLY REFINEMENTS --- */
 /* MODERN PERIODIC TABLE */
-@media (max-width: 768px) {
-    .periodic-table {
-        grid-template-columns: repeat(18, minmax(32px, 1fr));
-        grid-template-rows: repeat(10, minmax(32px, auto));
-        max-width: unset;
-        min-width: 650px;
-        gap: 2px;
-        padding: 2px;
-        font-size: 0.75rem;
-        overflow-x: auto;
-        margin: 0 auto;
-    }
-    #table {
-        width: 100vw;
-        overflow-x: auto;
-        padding-bottom: 8px;
-    }
-    .element-cell, .element {
-        min-width: 32px;
-        min-height: 32px;
-        font-size: 0.7em;
-        padding: 3px;
-    }
-    .element .symbol {
-        font-size: 1em;
-    }
-    .element .name, .element .number, .element .tooltip, .element .group-number {
-        font-size: 0.7em;
-        padding: 0 1px;
-    }
-    .element .tooltip {
-        min-width: 90px;
-        padding: 4px;
-        font-size: 0.65em;
-    }
-    .table-description {
-        font-size: 0.75rem;
-        padding: 8px;
-        max-width: 94vw;
-    }
-    .element-legend {
-        font-size: 0.7em;
-        padding: 8px;
-        margin: 10px auto 10px auto;
-    }
-}
+@media (max-width: 900px) {
+  .container, .table-section .container {
+    max-width: 100vw;
+    padding: 10px 0 80px 0;
+  }
 
-/* OCTAVES TABLE */
-@media (max-width: 768px) {
-    .octave-container {
-        padding: 5px;
-        gap: 10px;
-    }
-    .octaves-explanation {
-        font-size: 0.85em;
-        padding: 7px;
-        margin-bottom: 10px;
-    }
-    .octave-row {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        gap: 4px;
-        padding: 3px;
-        min-width: 380px;
-    }
-    .octave-row .element {
-        min-width: 38px;
-        min-height: 38px;
-        font-size: 0.8em;
-        padding: 4px;
-        max-width: 46px;
-    }
-}
+  #modern-table .element-legend, #modern-table #filters, #modern-table .table-description {
+    max-width: 98vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 6px 6px 6px 12px;
+    box-sizing: border-box;
+  }
 
-/* MENDELEEV TABLE */
-@media (max-width: 768px) {
-    .mendeleev-container {
-        padding: 5px;
-        gap: 10px;
-    }
-    .mendeleev-explanation {
-        font-size: 0.85em;
-        padding: 6px;
-        margin-bottom: 10px;
-    }
-    .mendeleev-table {
-        overflow-x: auto;
-        padding: 4px;
-        min-width: 600px;
-    }
-    .mendeleev-grid {
-        font-size: 0.72em;
-        min-width: 600px;
-    }
-    .mendeleev-grid th, .mendeleev-grid td {
-        padding: 3px;
-    }
-    .mendeleev-element {
-        min-width: 32px;
-        padding: 2px;
-        font-size: 0.9em;
-    }
-    .period-number {
-        font-size: 0.85em;
-        padding: 2px;
-    }
-}
+  .element-legend {
+    margin-bottom: 8px;
+    padding: 8px 6px;
+    font-size: 0.85em;
+  }
 
-/* TOUCH FRIENDLY BUTTONS */
-@media (max-width: 768px) {
-    .explore-btn, .back-btn, #filters button {
-        font-size: 1em;
-        padding: 8px 10px;
-        min-width: 80px;
-        min-height: 40px;
-        border-radius: 10px;
-    }
-}
+  #filters {
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 8px;
+    padding: 0 10px;
+    font-size: 1em;
+  }
+  #filters button {
+    min-width: 90px;
+    min-height: 36px;
+    font-size: 0.95em;
+    padding: 7px 10px;
+    margin-bottom: 2px;
+  }
 
-/* Ensure horizontal scroll works everywhere needed */
-#table, .mendeleev-table, .octave-container {
+  .table-description {
+    margin: 0 0 10px 0;
+    padding: 8px 10px;
+    font-size: 0.85em;
+    background: rgba(255,255,255,0.3);
+    border-radius: 7px;
+    position: static;
+    max-width: 98vw;
+    z-index: 1;
+  }
+
+  .table-scroll-wrapper {
+    width: 100vw;
     overflow-x: auto;
+    margin: 0 auto 12px auto;
+    position: relative;
+    background: none;
+  }
+
+  .periodic-table {
+    min-width: 700px;
+    max-width: none;
+    margin: 0;
+    padding: 5px 10px 5px 10px;
+    overflow-x: auto;
+    font-size: 0.85em;
+  }
+
+  .element-cell, .element {
+    min-width: 30px;
+    min-height: 30px;
+    font-size: 0.78em;
+    padding: 2px;
+  }
+  .element .symbol { font-size: 1em; }
+  .element .name, .element .number { font-size: 0.7em; }
+
+  .scroll-hint {
+    display: block;
+    text-align: right;
+    font-size: 1.3em;
+    color: #888;
+    position: absolute;
+    right: 12px;
+    top: 4px;
+    pointer-events: none;
+    opacity: 0.55;
+    z-index: 3;
+    background: none;
+  }
+}
+
+/* Always show scroll-hint only on mobile */
+@media (min-width: 901px) {
+  .scroll-hint { display: none !important; }
+}
+
+/* Remove overlay effect on .table-description (was absolute) */
+.table-description {
+  position: static !important;
+  margin-top: 0 !important;
+}
+
+/* Fix for background gradient cut-off on mobile */
+@media (max-width: 900px) {
+  .gradient-modern {
+    background-size: cover;
+    background-position: bottom left;
+    min-height: 100vh;
+  }
 }
