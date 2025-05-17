@@ -1,0 +1,999 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f8f9fa;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Section Styles */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pastel Gradient Backgrounds */
+.gradient-hero {
+    background: linear-gradient(135deg, #c7a9e9, #a1c4fd);
+}
+
+.gradient-history {
+    background: linear-gradient(135deg, #ffd3a5, #fd6585);
+}
+
+.gradient-uses {
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+}
+
+.gradient-explore {
+    background: linear-gradient(135deg, #81fbb8, #28c76f);
+}
+
+.gradient-modern {
+    background: linear-gradient(135deg, #8a84e2, #84fab0);
+}
+
+.gradient-triads {
+    background: linear-gradient(135deg, #fddb92, #d1fdff);
+}
+
+.gradient-octaves {
+    background: linear-gradient(135deg, #b721ff, #21d4fd);
+}
+
+.gradient-mendeleev {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+}
+
+/* Hero Section */
+#hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#hero p {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 40px;
+}
+
+.scroll-indicator {
+    text-align: center;
+    animation: bounce 2s infinite;
+    margin-top: 60px;
+    color: #333;
+}
+
+.scroll-indicator i {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* History Section */
+.history-timeline {
+    margin-top: 40px;
+}
+
+.timeline-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.timeline-item.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Uses Section */
+.uses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.use-card {
+    padding: 30px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.use-card.visible {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.use-card i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Explore Section */
+.explore-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 600px;
+    padding: 20px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.explore-btn {
+    padding: 30px;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.explore-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Periodic Table Styles */
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(19, minmax(60px, 1fr));
+    grid-template-rows: repeat(11, minmax(90px, auto));
+    gap: 5px;
+    margin: 40px auto;
+    max-width: min(95vw, 1600px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    overflow-x: auto;
+}
+
+.element-cell {
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.element {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    position: relative;
+}
+
+.element .number {
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.6);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.element .symbol {
+    font-weight: bold;
+    font-size: 1.4em;
+    margin: 5px 0;
+}
+
+.element .name {
+    font-size: 0.8em;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 2px;
+}
+
+.element .group-number {
+    display: none;
+    font-size: 0.75em;
+    color: #666;
+    text-align: center;
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.element .tooltip {
+    display: none;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 0.9em;
+    min-width: 150px;
+    z-index: 100;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    pointer-events: none;
+}
+
+.element .tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid rgba(255, 255, 255, 0.95);
+}
+
+.element .tooltip div {
+    margin: 4px 0;
+    color: #333;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.element:hover .tooltip {
+    display: block;
+}
+
+.element:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.element:hover .group-number {
+    display: block;
+}
+
+.table-description {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 0;
+    z-index: 2;
+    margin-top: 50px;
+}
+
+/* Center align tables */
+.periodic-table, #octaves-container {
+    margin: 30px auto;
+    max-width: min(95vw, 1400px);
+    justify-content: center;
+}
+
+#octaves-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.octave-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Improve table section layout */
+.table-section {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table-section .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 100vh;
+    padding: 20px 10px 80px;
+    gap: 20px;
+    padding-bottom: 120px;
+    padding-top: 60px;
+}
+
+/* Element category colors */
+.alkali { background-color: rgba(255, 102, 102, 0.8); }
+.alkaline { background-color: rgba(255, 191, 0, 0.8); }
+.transition { background-color: rgba(204, 204, 204, 0.8); }
+.metal { background-color: rgba(128, 128, 255, 0.8); }
+.metalloid { background-color: rgba(102, 204, 102, 0.8); }
+.nonmetal { background-color: rgba(255, 255, 102, 0.8); }
+.halogen { background-color: rgba(255, 204, 153, 0.8); }
+.noble { background-color: rgba(204, 153, 255, 0.8); }
+.lanthanoid { background-color: rgba(255, 153, 204, 0.8); }
+.actinoid { background-color: rgba(153, 204, 255, 0.8); }
+
+/* Table labels */
+.table-label {
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0,0,0,0.7);
+}
+
+.series-label {
+    grid-column: span 3;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+
+/* Filter buttons */
+#filters {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+#filters button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#filters button:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Back button */
+.back-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Historical tables styling */
+.triad-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.triad-group {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+}
+
+.triad-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.triad-elements {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Octaves specific styling */
+.octave-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.octaves-explanation {
+    max-width: 800px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.octave-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.octave-row .element {
+    min-width: 80px;
+    min-height: 80px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    text-align: center;
+    flex: 1;
+    max-width: 120px;
+}
+
+.octave-row .element:hover {
+    transform: scale(1.1);
+    background: #ffe4b5;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(117, 25, 208, 0.408);
+}
+
+.octave-row .element.highlighted {
+    box-shadow: 0 0 12px 4px rgba(117, 25, 208, 0.408);
+    background: rgba(255, 235, 205, 0.9);
+    position: relative;
+}
+
+/* Responsive adjustments for octaves */
+@media (max-width: 768px) {
+    .octave-row {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .octave-row .element {
+        min-width: 60px;
+        min-height: 60px;
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 3rem;
+    }
+    
+    .explore-buttons {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        gap: 20px;
+    }
+    
+    .periodic-table {
+        grid-template-columns: repeat(19, minmax(40px, 1fr));
+        grid-template-rows: repeat(11, minmax(60px, auto));
+        gap: 3px;
+        padding: 10px;
+        margin: 20px auto;
+    }
+    
+    .table-section .container {
+        padding: 10px 5px 100px;
+    }
+    
+    .table-description {
+        bottom: 100px;
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+    
+    .element .symbol {
+        font-size: 1.2em;
+    }
+    
+    .element .name {
+        font-size: 0.7em;
+    }
+
+    .element .number {
+        font-size: 0.7em;
+    }
+
+    .element .tooltip {
+        font-size: 0.8em;
+        min-width: 120px;
+        padding: 8px;
+    }
+
+    .element .group-number {
+        font-size: 0.7em;
+    }
+}
+
+/* Improve explore section layout */
+#explore .container {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+#explore h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#explore p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+    margin: 0 auto;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+}
+
+.element-cell {
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure proper spacing for the bottom text */
+.table-section .container {
+    position: relative;
+    padding-bottom: 120px;
+    padding-top: 60px;
+}
+
+.back-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* Mendeleev's Table Styles */
+.mendeleev-container {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.mendeleev-explanation {
+    max-width: 800px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.mendeleev-table {
+    width: 100%;
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.mendeleev-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    margin: 0 auto;
+}
+
+.mendeleev-grid th {
+    padding: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+.mendeleev-grid td {
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.mendeleev-element {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    padding: 8px;
+    min-width: 70px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.mendeleev-element:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(117, 25, 208, 0.408);
+    z-index: 10;
+}
+
+.mendeleev-element .symbol {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+}
+
+.mendeleev-element .weight {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.period-number {
+    font-weight: bold;
+    color: #333;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+.empty-cell {
+    color: #999;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* Add the hidden class back */
+.hidden {
+    display: none;
+}
+
+/* Responsive adjustments for Mendeleev's table */
+@media (max-width: 768px) {
+    .mendeleev-grid {
+        font-size: 0.9em;
+    }
+
+    .mendeleev-element {
+        min-width: 50px;
+        padding: 6px;
+    }
+
+    .mendeleev-grid th,
+    .mendeleev-grid td {
+        padding: 6px;
+    }
+}
+
+/* Element Legend Styles */
+.element-legend {
+    width: 90%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 40px auto 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.legend-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Ensure the color boxes match the element colors */
+.color-box.alkali { background-color: rgba(255, 102, 102, 0.8); }
+.color-box.alkaline { background-color: rgba(255, 191, 0, 0.8); }
+.color-box.transition { background-color: rgba(204, 204, 204, 0.8); }
+.color-box.metal { background-color: rgba(128, 128, 255, 0.8); }
+.color-box.metalloid { background-color: rgba(102, 204, 102, 0.8); }
+.color-box.nonmetal { background-color: rgba(255, 255, 102, 0.8); }
+.color-box.halogen { background-color: rgba(255, 204, 153, 0.8); }
+.color-box.noble { background-color: rgba(204, 153, 255, 0.8); }
+.color-box.lanthanoid { background-color: rgba(255, 153, 204, 0.8); }
+.color-box.actinoid { background-color: rgba(153, 204, 255, 0.8); }
+
+@media (max-width: 768px) {
+    .element-legend {
+        padding: 12px;
+        margin: 15px auto;
+    }
+
+    .legend-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 8px;
+    }
+
+    .legend-item {
+        font-size: 0.8em;
+    }
+
+    .color-box {
+        width: 16px;
+        height: 16px;
+    }
+
+    .table-description {
+        font-size: 0.8rem;
+        padding: 12px;
+        margin-top: 20px;
+    }
+}
+
+/* --- MOBILE FRIENDLY REFINEMENTS --- */
+/* MODERN PERIODIC TABLE */
+@media (max-width: 768px) {
+    .periodic-table {
+        grid-template-columns: repeat(18, minmax(32px, 1fr));
+        grid-template-rows: repeat(10, minmax(32px, auto));
+        max-width: unset;
+        min-width: 650px;
+        gap: 2px;
+        padding: 2px;
+        font-size: 0.75rem;
+        overflow-x: auto;
+        margin: 0 auto;
+    }
+    #table {
+        width: 100vw;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+    .element-cell, .element {
+        min-width: 32px;
+        min-height: 32px;
+        font-size: 0.7em;
+        padding: 3px;
+    }
+    .element .symbol {
+        font-size: 1em;
+    }
+    .element .name, .element .number, .element .tooltip, .element .group-number {
+        font-size: 0.7em;
+        padding: 0 1px;
+    }
+    .element .tooltip {
+        min-width: 90px;
+        padding: 4px;
+        font-size: 0.65em;
+    }
+    .table-description {
+        font-size: 0.75rem;
+        padding: 8px;
+        max-width: 94vw;
+    }
+    .element-legend {
+        font-size: 0.7em;
+        padding: 8px;
+        margin: 10px auto 10px auto;
+    }
+}
+
+/* OCTAVES TABLE */
+@media (max-width: 768px) {
+    .octave-container {
+        padding: 5px;
+        gap: 10px;
+    }
+    .octaves-explanation {
+        font-size: 0.85em;
+        padding: 7px;
+        margin-bottom: 10px;
+    }
+    .octave-row {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 4px;
+        padding: 3px;
+        min-width: 380px;
+    }
+    .octave-row .element {
+        min-width: 38px;
+        min-height: 38px;
+        font-size: 0.8em;
+        padding: 4px;
+        max-width: 46px;
+    }
+}
+
+/* MENDELEEV TABLE */
+@media (max-width: 768px) {
+    .mendeleev-container {
+        padding: 5px;
+        gap: 10px;
+    }
+    .mendeleev-explanation {
+        font-size: 0.85em;
+        padding: 6px;
+        margin-bottom: 10px;
+    }
+    .mendeleev-table {
+        overflow-x: auto;
+        padding: 4px;
+        min-width: 600px;
+    }
+    .mendeleev-grid {
+        font-size: 0.72em;
+        min-width: 600px;
+    }
+    .mendeleev-grid th, .mendeleev-grid td {
+        padding: 3px;
+    }
+    .mendeleev-element {
+        min-width: 32px;
+        padding: 2px;
+        font-size: 0.9em;
+    }
+    .period-number {
+        font-size: 0.85em;
+        padding: 2px;
+    }
+}
+
+/* TOUCH FRIENDLY BUTTONS */
+@media (max-width: 768px) {
+    .explore-btn, .back-btn, #filters button {
+        font-size: 1em;
+        padding: 8px 10px;
+        min-width: 80px;
+        min-height: 40px;
+        border-radius: 10px;
+    }
+}
+
+/* Ensure horizontal scroll works everywhere needed */
+#table, .mendeleev-table, .octave-container {
+    overflow-x: auto;
+}
