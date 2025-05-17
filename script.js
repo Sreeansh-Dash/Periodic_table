@@ -1239,84 +1239,7 @@ const octaves = [
     ['Pt, Ir', 'Tl', 'Pb', 'Th', 'Hg', 'Bi', 'Os']
 ];
 
-// Elements data, triads data, octaves data ... (unchanged, omitted for brevity)
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('hero').classList.add('visible');
-    window.addEventListener('scroll', handleScroll);
-    initializeMoreElements();
-});
-
-function handleScroll() {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        if (isElementInViewport(section)) {
-            section.classList.add('visible');
-            if (section.id === 'history') animateTimelineItems();
-            if (section.id === 'uses') animateUseCards();
-        }
-    });
-}
-function animateTimelineItems() {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    timelineItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.classList.add('visible');
-        }, index * 200);
-    });
-}
-function animateUseCards() {
-    const useCards = document.querySelectorAll('.use-card');
-    useCards.forEach((card, index) => {
-        setTimeout(() => {
-            card.classList.add('visible');
-        }, index * 150);
-    });
-}
-function isElementInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return (
-        rect.top <= window.innerHeight - 150 &&
-        rect.bottom >= 0
-    );
-}
-function navigateTo(tableType) {
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.add('hidden');
-        section.classList.remove('visible');
-    });
-    const tableSection = document.getElementById(`${tableType}-table`);
-    tableSection.classList.remove('hidden');
-    tableSection.classList.add('visible');
-    switch (tableType) {
-        case 'modern':
-            renderModernTable();
-            break;
-        case 'triads':
-            renderTriads();
-            break;
-        case 'octaves':
-            renderOctaves();
-            break;
-        case 'mendeleev':
-            renderMendeleev();
-            break;
-    }
-}
-function showMainPage() {
-    document.querySelectorAll('.table-section').forEach(section => {
-        section.classList.add('hidden');
-    });
-    document.querySelectorAll('.section').forEach(section => {
-        section.classList.remove('hidden');
-    });
-    const exploreSection = document.getElementById('explore');
-    exploreSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    handleScroll();
-}
-function initializeMoreElements() {}
-
-// --- MODERN PERIODIC TABLE ---
+// ...[all your original data and code above unchanged, then replace renderModernTable and renderMendeleev as below]...
 
 function renderModernTable() {
     // Containers
@@ -1392,6 +1315,8 @@ function renderModernTable() {
     tableContainer.innerHTML = '';
     const tableGrid = document.createElement('div');
     tableGrid.className = 'periodic-table';
+    tableGrid.style.minWidth = '800px'; // Make sure first column is always scrollable
+    tableGrid.style.width = 'max-content';
     tableContainer.appendChild(tableGrid);
 
     const totalRows = 10; // 7 main rows + lanthanoids + actinoids + spacing
@@ -1434,93 +1359,6 @@ function renderModernTable() {
     addTableLabels(tableGrid);
 }
 
-function addTableLabels(tableGrid) {
-    for (let i = 1; i <= 18; i++) {
-        const label = document.createElement('div');
-        label.className = 'table-label group-label';
-        label.textContent = i;
-        label.style.gridRow = 0;
-        label.style.gridColumn = i;
-        tableGrid.appendChild(label);
-    }
-    for (let i = 1; i <= 7; i++) {
-        const label = document.createElement('div');
-        label.className = 'table-label period-label';
-        label.textContent = i;
-        label.style.gridRow = i;
-        label.style.gridColumn = 0;
-        tableGrid.appendChild(label);
-    }
-    const lanthanideLabel = document.createElement('div');
-    lanthanideLabel.className = 'table-label series-label';
-    lanthanideLabel.textContent = 'Lanthanides';
-    lanthanideLabel.style.gridRow = 9;
-    lanthanideLabel.style.gridColumn = 2;
-    tableGrid.appendChild(lanthanideLabel);
-
-    const actinideLabel = document.createElement('div');
-    actinideLabel.className = 'table-label series-label';
-    actinideLabel.textContent = 'Actinides';
-    actinideLabel.style.gridRow = 10;
-    actinideLabel.style.gridColumn = 2;
-    tableGrid.appendChild(actinideLabel);
-}
-
-// --- TRIADS, OCTAVES, MENDELEEV TABLES (unchanged) ---
-
-function renderTriads() {
-    const container = document.getElementById('triads-container');
-    container.innerHTML = '';
-    container.className = 'triad-container';
-    triads.forEach(triad => {
-        const triadDiv = document.createElement('div');
-        triadDiv.className = 'triad-group';
-        triadDiv.innerHTML = `
-            <div class="triad-title">${triad.name}</div>
-            <div class="triad-elements">
-                ${triad.elements.map(el => `
-                    <div class="element">
-                        <div class="symbol">${el.symbol}</div>
-                        <div class="mass">${el.atomicMass}</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="triad-property">
-                <p>Mean of first and last: ${((triad.elements[0].atomicMass + triad.elements[2].atomicMass) / 2).toFixed(1)}</p>
-                <p>Middle element: ${triad.elements[1].atomicMass}</p>
-            </div>
-        `;
-        container.appendChild(triadDiv);
-    });
-}
-function renderOctaves() {
-    const container = document.getElementById('octaves-container');
-    container.innerHTML = '';
-    container.className = 'octave-container';
-    const explanation = document.createElement('div');
-    explanation.className = 'octaves-explanation';
-    explanation.innerHTML = `
-        <p>In 1865, John Newlands arranged the known elements by increasing atomic weight. 
-        He noticed that every eighth element exhibited similar properties, 
-        which he called the "Law of Octaves" (similar to musical octaves).</p>
-        <p>Elements highlighted in the same column position show the pattern Newlands observed.</p>
-    `;
-    container.appendChild(explanation);
-    octaves.forEach((row, rowIndex) => {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'octave-row';
-        row.forEach((element, colIndex) => {
-            const elementDiv = document.createElement('div');
-            elementDiv.className = 'element';
-            if (colIndex === rowIndex % 7) {
-                elementDiv.classList.add('highlighted');
-            }
-            elementDiv.innerHTML = element;
-            rowDiv.appendChild(elementDiv);
-        });
-        container.appendChild(rowDiv);
-    });
-}
 function renderMendeleev() {
     const container = document.getElementById('mendeleev-container');
     container.innerHTML = '';
@@ -1534,6 +1372,9 @@ function renderMendeleev() {
     container.appendChild(explanation);
     const tableDiv = document.createElement('div');
     tableDiv.className = 'mendeleev-table';
+    tableDiv.style.width = '100vw';
+    tableDiv.style.overflowX = 'auto';
+
     const mendeleevGroups = [
         ['H 1', 'Li 7', 'Na 23', 'K 39', 'Cu 63', 'Rb 85', 'Ag 108', 'Cs 133', 'Au 197'],
         ['Be 9', 'Mg 24', 'Ca 40', 'Zn 65', 'Sr 87', 'Cd 112', 'Ba 137', 'Hg 201'],
@@ -1550,6 +1391,9 @@ function renderMendeleev() {
     ];
     const table = document.createElement('table');
     table.className = 'mendeleev-grid';
+    table.style.minWidth = '800px';
+    table.style.width = 'max-content';
+
     const headerRow = document.createElement('tr');
     for (let i = 0; i <= mendeleevGroups.length; i++) {
         const th = document.createElement('th');
@@ -1563,6 +1407,9 @@ function renderMendeleev() {
         const periodTd = document.createElement('td');
         periodTd.className = 'period-number';
         periodTd.textContent = `Period ${row + 1}`;
+        periodTd.style.position = 'sticky';
+        periodTd.style.left = '0';
+        periodTd.style.background = 'rgba(255,255,255,0.6)';
         tr.appendChild(periodTd);
         for (let group = 0; group < mendeleevGroups.length; group++) {
             const td = document.createElement('td');
@@ -1583,18 +1430,4 @@ function renderMendeleev() {
     }
     tableDiv.appendChild(table);
     container.appendChild(tableDiv);
-}
-function toRomanNumeral(num) {
-    const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-    return romanNumerals[num - 1] || num.toString();
-}
-function filterCategory(category) {
-    const elements = document.querySelectorAll('.element');
-    elements.forEach(el => {
-        if (category === 'all' || el.classList.contains(category)) {
-            el.style.opacity = '1';
-        } else {
-            el.style.opacity = '0.3';
-        }
-    });
 }
