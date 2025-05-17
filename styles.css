@@ -868,6 +868,8 @@ h2 {
     }
 }
 
+/* ... (all your previous styles remain as is up to the MODERN/MOBILE section) ... */
+
 /* --- MOBILE FRIENDLY REFINEMENTS --- */
 /* MODERN PERIODIC TABLE */
 @media (max-width: 900px) {
@@ -922,14 +924,17 @@ h2 {
     margin: 0 auto 12px auto;
     position: relative;
     background: none;
+    /* Make sure the child fills min-width and is aligned left */
+    box-sizing: border-box;
   }
 
   .periodic-table {
-    min-width: 700px;
+    min-width: 800px;        /* Increased from 700px! */
+    width: max-content;      /* Key: forces grid to actual content width */
     max-width: none;
     margin: 0;
-    padding: 5px 10px 5px 10px;
-    overflow-x: auto;
+    padding: 5px 0 5px 0;    /* Remove side paddings */
+    overflow-x: visible;     /* Let the parent handle scrolling */
     font-size: 0.85em;
   }
 
@@ -957,6 +962,38 @@ h2 {
   }
 }
 
+/* MENDELEEV TABLE FIX */
+@media (max-width: 900px) {
+  .mendeleev-table {
+    width: 100vw;
+    overflow-x: auto;
+    padding: 4px 0 4px 0;
+    min-width: unset;
+    box-sizing: border-box;
+  }
+  .mendeleev-grid {
+    min-width: 800px;      /* Ensure first column always visible */
+    width: max-content;    /* Use actual content width */
+    font-size: 0.72em;
+  }
+  .mendeleev-grid th, .mendeleev-grid td {
+    padding: 3px;
+  }
+  .mendeleev-element {
+    min-width: 32px;
+    padding: 2px;
+    font-size: 0.9em;
+  }
+  .period-number {
+    font-size: 0.85em;
+    padding: 2px;
+    background: rgba(255,255,255,0.6);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+}
+
 /* Always show scroll-hint only on mobile */
 @media (min-width: 901px) {
   .scroll-hint { display: none !important; }
@@ -975,4 +1012,10 @@ h2 {
     background-position: bottom left;
     min-height: 100vh;
   }
+}
+
+/* Make sure table wrapper allows scrolling to very left */
+.table-scroll-wrapper, .mendeleev-table {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
